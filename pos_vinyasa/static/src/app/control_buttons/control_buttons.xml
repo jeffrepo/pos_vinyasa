@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates id="template" xml:space="preserve">
+    <t t-name="pos_vinyasa.ControlButtons"
+       t-inherit="point_of_sale.ControlButtons"
+       t-inherit-mode="extension">
+        <xpath expr="//SelectPartnerButton" position="after">
+            <button t-if="!props.showRemainingButtons"
+                    class="pos-customer-name-button text-truncate"
+                    t-att-class="buttonClass"
+                    t-att-disabled="currentOrder?.isEmpty()"
+                    t-on-click="clickPosCustomerName">
+                Cliente
+            </button>
+        </xpath>
+        <xpath expr="//InternalNoteButton" position="replace">
+            <InternalNoteButton label.translate="Nota interna" class="buttonClass"/>
+        </xpath>
+    </t>
+
+    <t t-name="pos_vinyasa.SelectPartnerButton"
+       t-inherit="point_of_sale.SelectPartnerButton"
+       t-inherit-mode="extension">
+        <xpath expr="//t[@t-else]" position="replace">
+            <t t-else="">Nombre factura</t>
+        </xpath>
+    </t>
+</templates>
